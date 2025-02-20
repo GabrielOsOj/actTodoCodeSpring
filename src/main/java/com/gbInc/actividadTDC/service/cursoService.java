@@ -2,6 +2,7 @@ package com.gbInc.actividadTDC.service;
 
 import com.gbInc.actividadTDC.model.Curso;
 import com.gbInc.actividadTDC.repository.IcursoRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,13 @@ public class cursoService implements IcursoService {
 
 	}
 
+	@Override
+	public void crearVariosCursos(List<Curso> cursos) {
+		
+		for(Curso c : cursos){
+			this.crearCurso(c);
+		}
+		
+	}
+	
 }
