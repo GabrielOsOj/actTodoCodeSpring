@@ -10,5 +10,6 @@ public interface ItemaService {
 	
 	public Boolean crearVariosTemas(List<DTOtema> temas);
 	
+	public Boolean editarTema(Tema tema);
 	
 }

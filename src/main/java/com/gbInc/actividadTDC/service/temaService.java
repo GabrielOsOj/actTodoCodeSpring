@@ -67,4 +67,15 @@ public class temaService implements ItemaService {
 		return t;
 	}
 
+	@Override
+	public Boolean editarTema(Tema t){
+		
+		if(this.temaRepo.findById(t.getIdTema()).isEmpty()){
+			return false;
+		}
+		
+		this.temaRepo.save(t);
+		return true;
+		
+	}
 }
