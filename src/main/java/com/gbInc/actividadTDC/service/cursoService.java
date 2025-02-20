@@ -45,4 +45,12 @@ public class cursoService implements IcursoService {
 		return c.getListaDeTemas();
 	
 	}
+	
+	@Override
+	public List<Curso> obtenerCursosPorBusqueda(String nombre){
+		
+		System.out.println(nombre + "<---");
+		return this.cursoRepo.findByNombreCurso(nombre);
+	
+	};
 }

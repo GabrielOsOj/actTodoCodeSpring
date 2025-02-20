@@ -60,4 +60,18 @@ public class cursoController {
 		}
 		
 	}
+		
+	@GetMapping("/buscarCursos")
+	public ResponseEntity<List<Curso>> obtenerCursosPorBusqueda(@RequestParam String nombre){
+		
+		List<Curso> cursos = this.cursoSV.obtenerCursosPorBusqueda(nombre);
+	
+		if(cursos.size()==0){
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}else{
+			return new ResponseEntity<>(cursos,HttpStatus.OK);
+		}
+		
+	}
+	
 }

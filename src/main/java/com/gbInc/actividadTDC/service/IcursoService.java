@@ -12,6 +12,8 @@ public interface IcursoService {
 	public void crearVariosCursos(List<Curso> cursos);
 	
 	public List<Curso> obtenerTodosLosCursos();
+	public List<Curso> obtenerCursosPorBusqueda(String nombre);
 	
 	public List<Tema> obtenerTemasDeCurso(Long idCurso);
+	
 }
