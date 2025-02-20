@@ -2,6 +2,7 @@ package com.gbInc.actividadTDC.controller;
 
 import com.gbInc.actividadTDC.service.IcursoService;
 import com.gbInc.actividadTDC.model.Curso;
+import com.gbInc.actividadTDC.model.Tema;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -44,4 +46,18 @@ public class cursoController {
 		List<Curso> cursos = this.cursoSV.obtenerTodosLosCursos();
 		return new ResponseEntity<>(cursos,HttpStatus.ACCEPTED);
 	};
+	
+	@GetMapping("/obtenerTemasCurso")
+	public ResponseEntity<List<Tema>> obtenerTemasDeCurso
+		(@RequestParam Long idCurso){
+			
+		List<Tema> temas = this.cursoSV.obtenerTemasDeCurso(idCurso);
+		
+		if(temas == null){
+			return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+		}else{
+			return new ResponseEntity<>(temas,HttpStatus.OK);
+		}
+		
+	}
 }

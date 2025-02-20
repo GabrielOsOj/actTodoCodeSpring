@@ -1,6 +1,7 @@
 package com.gbInc.actividadTDC.service;
 
 import com.gbInc.actividadTDC.model.Curso;
+import com.gbInc.actividadTDC.model.Tema;
 import com.gbInc.actividadTDC.repository.IcursoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,17 @@ public class cursoService implements IcursoService {
 	@Override
 	public List<Curso> obtenerTodosLosCursos(){
 		return this.cursoRepo.findAll();
+	}
+
+	@Override
+	public List<Tema> obtenerTemasDeCurso(Long idCurso) {
+		
+		Curso c = this.cursoRepo.findById(idCurso).orElse(null);
+		if(c==null){
+			return null;
+		}
+		
+		return c.getListaDeTemas();
+	
 	}
 }

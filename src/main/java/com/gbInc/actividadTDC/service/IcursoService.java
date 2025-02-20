@@ -1,6 +1,8 @@
 package com.gbInc.actividadTDC.service;
 
 import com.gbInc.actividadTDC.model.Curso;
+import com.gbInc.actividadTDC.model.Tema;
+
 import java.util.List;
 
 
@@ -10,4 +12,6 @@ public interface IcursoService {
 	public void crearVariosCursos(List<Curso> cursos);
 	
 	public List<Curso> obtenerTodosLosCursos();
+	
+	public List<Tema> obtenerTemasDeCurso(Long idCurso);
 }
