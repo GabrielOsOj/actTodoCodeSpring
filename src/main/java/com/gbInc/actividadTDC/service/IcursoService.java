@@ -9,4 +9,5 @@ public interface IcursoService {
 	public void crearCurso(Curso curso);
 	public void crearVariosCursos(List<Curso> cursos);
 	
+	public List<Curso> obtenerTodosLosCursos();
 }

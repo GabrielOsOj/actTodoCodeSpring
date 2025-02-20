@@ -27,5 +27,9 @@ public class cursoService implements IcursoService {
 		}
 		
 	}
-	
+
+	@Override
+	public List<Curso> obtenerTodosLosCursos(){
+		return this.cursoRepo.findAll();
+	}
 }
