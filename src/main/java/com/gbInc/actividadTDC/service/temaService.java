@@ -25,7 +25,10 @@ public class temaService implements ItemaService {
 		 * si viene con un id de un curso, se busca y si existe, se guarda, si viene sin
 		 * id, se guarda sin id, y si el id del curso no existe, retorna false
 		 */
-			if (tema.getIdCursoPerteneciente()!=null) {
+
+		Tema temaDao = this.dtoToTema(tema);
+
+		if (tema.getIdCursoPerteneciente() != null) {
 
 			Curso curso = this.cursoRepo.findById(tema.getIdCursoPerteneciente()).get();
 
@@ -33,11 +36,13 @@ public class temaService implements ItemaService {
 				return false;
 			}
 
-			this.temaRepo.save(this.dtoToTema(tema));
+			this.temaRepo.save(temaDao);
+			curso.getListaDeTemas().add(temaDao);
+			this.cursoRepo.save(curso);
 			return true;
 		}
 
-		this.temaRepo.save(this.dtoToTema(tema));
+		this.temaRepo.save(temaDao);
 		return true;
 
 	}
