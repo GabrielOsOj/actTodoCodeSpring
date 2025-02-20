@@ -16,4 +16,6 @@ public interface IcursoService {
 	
 	public List<Tema> obtenerTemasDeCurso(Long idCurso);
 	
+	public Boolean editarCurso(Curso c);
+	
 }

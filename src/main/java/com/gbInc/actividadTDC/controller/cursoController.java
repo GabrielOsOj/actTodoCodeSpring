@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,4 +75,17 @@ public class cursoController {
 		
 	}
 	
+	@PutMapping("/editar")
+	public ResponseEntity<Boolean> editarCurso(@RequestBody Curso c){
+	
+		Boolean editado = this.cursoSV.editarCurso(c);
+		
+		if(editado){
+			return new ResponseEntity<>(true,HttpStatus.NO_CONTENT);
+		}else{
+			return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
+		}
+	
+		
+	}
 }

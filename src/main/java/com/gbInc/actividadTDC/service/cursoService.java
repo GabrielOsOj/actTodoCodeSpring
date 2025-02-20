@@ -22,35 +22,47 @@ public class cursoService implements IcursoService {
 
 	@Override
 	public void crearVariosCursos(List<Curso> cursos) {
-		
-		for(Curso c : cursos){
+
+		for (Curso c : cursos) {
 			this.crearCurso(c);
 		}
-		
+
 	}
 
 	@Override
-	public List<Curso> obtenerTodosLosCursos(){
+	public List<Curso> obtenerTodosLosCursos() {
 		return this.cursoRepo.findAll();
 	}
 
 	@Override
 	public List<Tema> obtenerTemasDeCurso(Long idCurso) {
-		
+
 		Curso c = this.cursoRepo.findById(idCurso).orElse(null);
-		if(c==null){
+		if (c == null) {
 			return null;
 		}
-		
+
 		return c.getListaDeTemas();
-	
+
 	}
-	
+
 	@Override
-	public List<Curso> obtenerCursosPorBusqueda(String nombre){
-		
+	public List<Curso> obtenerCursosPorBusqueda(String nombre) {
+
 		System.out.println(nombre + "<---");
 		return this.cursoRepo.findByNombreCurso(nombre);
-	
+
 	};
+
+	@Override
+	public Boolean editarCurso(Curso c) {
+
+		if (this.cursoRepo.findById(c.getIdCurso()).isEmpty()) {
+			return false;
+		}
+
+		this.cursoRepo.save(c);
+		return true;
+	}
+
 }
