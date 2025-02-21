@@ -4,6 +4,7 @@ import com.gbInc.actividadTDC.model.Curso;
 import com.gbInc.actividadTDC.model.Tema;
 import com.gbInc.actividadTDC.repository.IcursoRepository;
 import com.gbInc.actividadTDC.repository.ItemaRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +33,10 @@ public class cursoService implements IcursoService {
 	public Boolean crearVariosCursos(List<Curso> cursos) {
 
 		for (Curso c : cursos) {
-			if(!this.crearCurso(c)){
+			if (!this.crearCurso(c)) {
 				return false;
-			};
+			}
+			;
 		}
 		return true;
 	}
@@ -85,28 +87,38 @@ public class cursoService implements IcursoService {
 		 * si tiene id, pero el nombre y descripcion son null, es un tema que deberia
 		 * existir en la base de datos, por lo tanto se verifica que exista
 		 */
+
+		/*
+		 * Si hay algun tema que se necesite guarda, se almacena en este array, es para
+		 * que se guarden solo si todos los temas de la lista son correctos. (sino se
+		 * guardarian algunos si y otros no, si hay un error, se corrige y se reenvia la
+		 * peticion de nuevo va a existir un error de tema repetido)
+		 */
+		List<Tema> temasAguardar = new ArrayList<>();
+
 		for (Tema t : temas) {
-			
-			System.out.println("----------------------------");
-			System.out.println("tema id -->"+t.getIdTema());
-			System.out.println("tema nombre -->"+t.getNombre());
-			System.out.println("tema descripcion -->"+t.getDescripcion());
-				
+
 			if (t.getIdTema() != null && t.getNombre() == null && t.getDescripcion() == null) {
-				
+
 				if (!this.temaRepo.existsById(t.getIdTema())) {
 					return false;
 				}
-
-				continue;
 			}
 
 			if (t.getIdTema() == null) {
-				this.temaRepo.save(t);
+				temasAguardar.add(t);
 			}
 
 		}
 
+		/*si todos los temas de la lista son validos, se guardan los necesarios*/
+		
+		for(Tema t : temasAguardar){
+			
+			temaRepo.save(t);
+			
+		}
+		
 		return true;
 	}
 
