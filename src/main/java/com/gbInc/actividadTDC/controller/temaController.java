@@ -23,8 +23,15 @@ public class temaController {
 	@PostMapping("/crearTema")
 	public ResponseEntity<Boolean> crearTema(@RequestBody DTOtema tema) {
 
-		this.temaSV.crearTema(tema);
-		return new ResponseEntity<>(true, HttpStatus.CREATED);
+		Boolean creado = this.temaSV.crearTema(tema);
+
+		if (creado) {
+
+			return new ResponseEntity<>(true, HttpStatus.CREATED);
+		}
+		else {
+			return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+		}
 
 	}
 
@@ -40,17 +47,18 @@ public class temaController {
 			return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PutMapping("/editar")
-	public ResponseEntity<Boolean> editarTema(@RequestBody Tema t){
-		
+	public ResponseEntity<Boolean> editarTema(@RequestBody Tema t) {
+
 		Boolean editado = this.temaSV.editarTema(t);
-		if(editado){
-			return new ResponseEntity<>(true,HttpStatus.NO_CONTENT);
-		}else{
-			return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
+		if (editado) {
+			return new ResponseEntity<>(true, HttpStatus.NO_CONTENT);
 		}
-			
+		else {
+			return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+		}
+
 	}
 
 }

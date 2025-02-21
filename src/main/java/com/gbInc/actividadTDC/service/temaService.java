@@ -30,7 +30,7 @@ public class temaService implements ItemaService {
 
 		if (tema.getIdCursoPerteneciente() != null) {
 
-			Curso curso = this.cursoRepo.findById(tema.getIdCursoPerteneciente()).get();
+			Curso curso = this.cursoRepo.findById(tema.getIdCursoPerteneciente()).orElse(null);
 
 			if (curso == null) {
 				return false;
