@@ -27,7 +27,8 @@ public class temaService implements ItemaService {
 		 */
 
 		Tema temaDao = this.dtoToTema(tema);
-
+		temaDao.setIdTema(null);
+		
 		if (tema.getIdCursoPerteneciente() != null) {
 
 			Curso curso = this.cursoRepo.findById(tema.getIdCursoPerteneciente()).orElse(null);

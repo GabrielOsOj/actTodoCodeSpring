@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IcursoService {
 
-	public void crearCurso(Curso curso);
-	public void crearVariosCursos(List<Curso> cursos);
+	public Boolean crearCurso(Curso curso);
+	public Boolean crearVariosCursos(List<Curso> cursos);
 	
 	public List<Curso> obtenerTodosLosCursos();
 	public List<Curso> obtenerCursosPorBusqueda(String nombre);

@@ -3,6 +3,7 @@ package com.gbInc.actividadTDC.service;
 import com.gbInc.actividadTDC.model.Curso;
 import com.gbInc.actividadTDC.model.Tema;
 import com.gbInc.actividadTDC.repository.IcursoRepository;
+import com.gbInc.actividadTDC.repository.ItemaRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,20 +14,29 @@ public class cursoService implements IcursoService {
 	@Autowired
 	IcursoRepository cursoRepo;
 
+	@Autowired
+	ItemaRepository temaRepo;
+
 	@Override
-	public void crearCurso(Curso curso) {
+	public Boolean crearCurso(Curso curso) {
 
-		this.cursoRepo.save(curso);
+		if (this.controlDeTemas(curso.getListaDeTemas())) {
+			this.cursoRepo.save(curso);
+			return true;
+		}
 
+		return false;
 	}
 
 	@Override
-	public void crearVariosCursos(List<Curso> cursos) {
+	public Boolean crearVariosCursos(List<Curso> cursos) {
 
 		for (Curso c : cursos) {
-			this.crearCurso(c);
+			if(!this.crearCurso(c)){
+				return false;
+			};
 		}
-
+		return true;
 	}
 
 	@Override
@@ -49,7 +59,6 @@ public class cursoService implements IcursoService {
 	@Override
 	public List<Curso> obtenerCursosPorBusqueda(String nombre) {
 
-		System.out.println(nombre + "<---");
 		return this.cursoRepo.findByNombreCurso(nombre);
 
 	};
@@ -62,6 +71,42 @@ public class cursoService implements IcursoService {
 		}
 
 		this.cursoRepo.save(c);
+		return true;
+	}
+
+	/***
+	 * Verifica que los temas existan en la base de datos, sino los guarda
+	 * @param temas
+	 * @return true si todo se guardo correctamente, false si hubo algun error
+	 */
+	private Boolean controlDeTemas(List<Tema> temas) {
+
+		/*
+		 * si tiene id, pero el nombre y descripcion son null, es un tema que deberia
+		 * existir en la base de datos, por lo tanto se verifica que exista
+		 */
+		for (Tema t : temas) {
+			
+			System.out.println("----------------------------");
+			System.out.println("tema id -->"+t.getIdTema());
+			System.out.println("tema nombre -->"+t.getNombre());
+			System.out.println("tema descripcion -->"+t.getDescripcion());
+				
+			if (t.getIdTema() != null && t.getNombre() == null && t.getDescripcion() == null) {
+				
+				if (!this.temaRepo.existsById(t.getIdTema())) {
+					return false;
+				}
+
+				continue;
+			}
+
+			if (t.getIdTema() == null) {
+				this.temaRepo.save(t);
+			}
+
+		}
+
 		return true;
 	}
 
