@@ -196,7 +196,7 @@ localhost:8080/curso/crearVarios
 
 ## Petición PUT
 
-## Editar curso
+### Editar curso
 
 ```json
 localhost:8080/curso/editar
