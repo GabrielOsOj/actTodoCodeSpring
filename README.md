@@ -225,7 +225,7 @@ permite editar una clase en especifico, se debe enviar la clase completa con los
 
 # Probar el proyecto
 
-para probar el proyecto, necesitas hacer una serie de pasos previos
+para probar el proyecto correctamente, se necesitan ciertos pasos previos:
 
 1. Este proyecto utiliza una base de datos MySQL desplegada usando xampp
 2. Una vez que instales xampp, inicia el servidor MySQL e ingresa usando phpMyAdmin (tambien puedes usar MySQLWorkwrench, que es como lo hice yo, pero necesitas la descarga, instalacion y configuración del programa), necesitas crear una nueva base de datos con el nombre de tu preferencia:
@@ -259,6 +259,8 @@ application.properties
 
 este archivo lo vamos a usar mas adelante.
 
+Ademas para compilar el proyecto, es necesario que cuentes con el jdk y maven correctamente configurado.
+
 Descargamos el proyecto desde github, podemos descargarlo en formato zip o clonarlo de la siguiente forma:
 
 1. creamos una nueva carpeta en donde vamos a clonar el proyecto.
@@ -266,7 +268,7 @@ Descargamos el proyecto desde github, podemos descargarlo en formato zip o clona
 3. clonamos el repositorio usando:
 
 ```bash
-git clone "url repo a colocar"
+git clone "https://github.com/GabrielOsOj/actTodoCodeSpring.git"
 ```
 
 Una vez descargado el repositorio, (si lo bajaste comprimido, lo descomprimís). Nos dirigimos a la carpeta:
